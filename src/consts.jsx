@@ -1,1 +1,0 @@
-export const JUMP_FORCE = 5;
