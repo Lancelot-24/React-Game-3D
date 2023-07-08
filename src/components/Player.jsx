@@ -1,4 +1,4 @@
-import { Physics, useSphere } from '@react-three/cannon';
+import {useBox } from '@react-three/cannon';
 import { useThree, useFrame, act } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { useEffect, useRef } from 'react';
@@ -15,7 +15,7 @@ export const Player = () => {
     const { camera } = useThree()
 
     //player physics setup
-    const [ref, api] = useSphere(() => ({
+    const [ref, api] = useBox(() => ({
         mass: 1,
         type: 'Dynamic',
         position: [0, 0, 0]
@@ -39,7 +39,7 @@ export const Player = () => {
 
     //Called every frame
     useFrame(() => {
-        camera.position.copy(new Vector3(pos.current[0], pos.current[1], pos.current[2]))
+        camera.position.copy(new Vector3(pos.current[0], pos.current[1]+ 0.5, pos.current[2]))
 
         const direction = new Vector3()
 
@@ -61,14 +61,12 @@ export const Player = () => {
             .subVectors(frontVector, sideVector)
             .applyEuler(camera.rotation)
 
-        console.log([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + direction.z)])
-
         if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))]))
         {
             api.position.set(pos.current[0] + Math.round(direction.x), pos.current[1], pos.current[2] + Math.round(direction.z))
+            
             hasMoved = true;
-        }    
-
+        }
         switch (true) {
             case jump:
                 if (Math.abs(vel.current[1]) < 0.03)
