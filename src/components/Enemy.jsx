@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useAnimations, useGLTF } from '@react-three/drei';
 
 export const Enemy = () => {
-    const model = useGLTF('./public/exe/scene.gltf')
+    const model = useGLTF('./exe/scene.gltf')
     const animations = useAnimations(model.animations, model.scene)
 
     //enemy physics setup
