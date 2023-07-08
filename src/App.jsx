@@ -18,7 +18,7 @@ function App() {
         <Stars />
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 15, 10]} angle={0.3} />
-        <axesHelper args={[5]} />
+        //<axesHelper args={[5]} />
         <FPV />
         <Physics>
           <Grid />
@@ -29,7 +29,7 @@ function App() {
           
         </Physics>
        
-        <ContactShadows position={[0, -1.6, 0]} opacity={0.5} width={10} height={10} blur={1} far={1.6} />
+        <ContactShadows position={[0, -0.9, -0.025]} opacity={1}  blur={1} far={10} />
       </Canvas>
       <div className='absolute centered cursor'>+</div>
     </>

@@ -1,9 +1,11 @@
 import { useBox } from '@react-three/cannon';
 import {useFrame} from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import { Zero } from './Zero';
+import { useAnimations, useGLTF } from '@react-three/drei';
 
 export const Enemy = () => {
+    const model = useGLTF('./public/exe/scene.gltf')
+    const animations = useAnimations(model.animations, model.scene)
 
     //enemy physics setup
     const [ref, api] = useBox(() => ({
@@ -23,12 +25,16 @@ export const Enemy = () => {
 
     //Called every frame
     useFrame(() => {
-        api.position.set(0, -1, -2)
+        const action = animations.actions['ch049_ui_debut_loop']
+        const action2 = animations.actions['ch049_skill_01_stand_mid']
+        action.play()
+       // action2.play()
+        api.position.set(0, -0.935, -2)
     })
 
     return (
         <mesh ref={ref}>
-        <Zero />
+        <primitive object={model.scene} scale={0.5} />
         </mesh>
 
     );
