@@ -39,7 +39,7 @@ export const Player = () => {
 
     //Called every frame
     useFrame(() => {
-        camera.position.copy(new Vector3(pos.current[0], pos.current[1], pos.current[2] + 0.7))
+        camera.position.copy(new Vector3(pos.current[0], pos.current[1], pos.current[2]))
 
         const direction = new Vector3()
 
@@ -61,9 +61,11 @@ export const Player = () => {
             .subVectors(frontVector, sideVector)
             .applyEuler(camera.rotation)
 
-        if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + direction.x, Math.round(pos.current[2] + direction.z)]))
+        console.log([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + direction.z)])
+
+        if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))]))
         {
-            api.position.set(pos.current[0] + direction.x, pos.current[1], pos.current[2] + direction.z)
+            api.position.set(pos.current[0] + Math.round(direction.x), pos.current[1], pos.current[2] + Math.round(direction.z))
             hasMoved = true;
         }    
 
