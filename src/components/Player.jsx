@@ -5,9 +5,12 @@ import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
 import { JUMP_FORCE } from '../helperScripts/consts';
 import { CheckValidMove } from '../helperScripts/helper';
+import { useAnimations, useGLTF } from '@react-three/drei';
+import { PlayerEXE } from './PlayerModel';
 
 export const Player = () => {
     let hasMoved;
+
     //player actions setup
     const { moveBackward, moveForward, moveRight, moveLeft, jump, attack } = useKeyboard()
 
@@ -39,7 +42,7 @@ export const Player = () => {
 
     //Called every frame
     useFrame(() => {
-        camera.position.copy(new Vector3(pos.current[0], pos.current[1]+ 0.5, pos.current[2]))
+        camera.position.copy(new Vector3(pos.current[0], pos.current[1]+0.5, pos.current[2]+0.5))
 
         const direction = new Vector3()
 
@@ -64,19 +67,23 @@ export const Player = () => {
         if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))]))
         {
             api.position.set(pos.current[0] + Math.round(direction.x), pos.current[1], pos.current[2] + Math.round(direction.z))
-            
             hasMoved = true;
         }
+
+        //jump
         switch (true) {
             case jump:
                 if (Math.abs(vel.current[1]) < 0.03)
                     api.velocity.set(0, JUMP_FORCE, 0)
                 break;
         }
+        
+       
     })
 
     return (
         <mesh ref={ref}>
+        <PlayerEXE position={[0,-0.4,0.1]}/>
         </mesh>
 
     );
