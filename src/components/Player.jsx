@@ -5,14 +5,13 @@ import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
 import { JUMP_FORCE } from '../helperScripts/consts';
 import { CheckValidMove } from '../helperScripts/helper';
-import { useAnimations, useGLTF } from '@react-three/drei';
 import { PlayerEXE } from './PlayerModel';
 
 export const Player = () => {
     let hasMoved;
 
     //player actions setup
-    const { moveBackward, moveForward, moveRight, moveLeft, jump, attack } = useKeyboard()
+    const { moveBackward, moveForward, moveRight, moveLeft, jump } = useKeyboard()
 
     //player camera setup
     const { camera } = useThree()
@@ -42,7 +41,7 @@ export const Player = () => {
 
     //Called every frame
     useFrame(() => {
-        camera.position.copy(new Vector3(pos.current[0], pos.current[1]+0.5, pos.current[2]+0.5))
+        camera.position.copy(new Vector3(pos.current[0], pos.current[1]+0.6, pos.current[2]+0.7))
 
         const direction = new Vector3()
 

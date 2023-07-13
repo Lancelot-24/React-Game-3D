@@ -7,23 +7,44 @@ Source: https://sketchfab.com/3d-models/megaman-x-dive-megamanexe-65f58288d8744b
 Title: Megaman X Dive - Megaman.exe
 */
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
+import { useKeyboard } from '../hooks/useKeyboard'
 
 export function PlayerEXE(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/scene.glb')
-  const texture = useTexture('./exe/textures/skin.png')
+  const {attack} = useKeyboard()
   const { actions } = useAnimations(animations, group)
+  const [name, setName] = useState('ch049_ui_debut_loop')
 
-useFrame(() => {
 
-  //actions['ch049_ui_debut_loop'].play() 
-  actions['ch049_skill_01_stand_mid'].play() 
-  //ch049_skill_01_stand_mid
-})
+  const [animPlayed, setAnimPlayed] = useState(false)
+  const [animTimer, setAnimTimer] = useState(0)
+
+  useEffect(() => {
+    actions[name].reset().fadeIn(0.5).play()
+    
+    return () => {
+      actions[name].fadeOut(0.5)
+    }
+  }, [name])
+
+  useFrame(() => {
+    {animPlayed && setAnimTimer(animTimer + 1)}
+
+    {animTimer > 60 && setAnimPlayed(false)}
+    {animTimer > 60 && setAnimTimer(0)}
+    {animTimer > 60 && setName('ch049_ui_debut_loop')}
+
+    onclick = () => {
+        setAnimPlayed(true)
+        setName('ch049_skill_01_stand_mid')
+    }
+    
+  })
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -38,7 +59,6 @@ useFrame(() => {
                   <group name="Object_8" position={[0, 0, -0.024]} />
                   <group name="Object_10" position={[0, 0, -0.024]} />
                   <group name="Object_12" position={[0, 0, -0.024]} />
-                  <meshStandardMaterial map={texture} />
                   <skinnedMesh name="Object_7" geometry={nodes.Object_7.geometry} material={materials['Scene_-_Root']} skeleton={nodes.Object_7.skeleton} />
                   <skinnedMesh name="Object_9" geometry={nodes.Object_9.geometry} material={materials['Scene_-_Root']} skeleton={nodes.Object_9.skeleton} />
                   <skinnedMesh name="Object_11" geometry={nodes.Object_11.geometry} material={materials['Scene_-_Root']} skeleton={nodes.Object_11.skeleton} />
