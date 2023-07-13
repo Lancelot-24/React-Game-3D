@@ -1,13 +1,16 @@
 import { useBox } from '@react-three/cannon';
 import {useFrame} from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
-import { useAnimations, useGLTF, useTexture } from '@react-three/drei';
-import { MeshPhysicalMaterial } from 'three';
+import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
+import { CheckValidMove, RandomRange } from '../helperScripts/helper';
+import { enemyGridPositions } from '../helperScripts/consts';
 
 
 
 export const Enemy = () => {
+    
+    const [moved, setMoved] = useState(false)
+    const [moveTimer, setMoveTimer] = useState(0)
 
     //enemy physics setup
     const [ref, api] = useBox(() => ({
@@ -27,7 +30,22 @@ export const Enemy = () => {
 
     //Called every frame
     useFrame(() => {
-        api.position.set(0, -0.935, -2)
+        
+        {moved && setMoveTimer(moveTimer + 1)}
+        {moveTimer > 60 && setMoveTimer(0)}
+        {moveTimer > 60 && setMoved(false)}
+
+        if(!moved)
+        {
+            let x = RandomRange(-1, 2)
+            let z = RandomRange(-1, 2)
+            if(CheckValidMove([x + pos.current[0], z + pos.current[2]], enemyGridPositions))
+            {
+                api.position.set(x + pos.current[0], -1, z + pos.current[2])
+                setMoved(true)
+            }
+        }
+        
     })
 
     return (

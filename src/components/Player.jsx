@@ -3,7 +3,7 @@ import { useThree, useFrame, act } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
-import { JUMP_FORCE } from '../helperScripts/consts';
+import { JUMP_FORCE, gridPositions } from '../helperScripts/consts';
 import { CheckValidMove } from '../helperScripts/helper';
 import { PlayerEXE } from './PlayerModel';
 
@@ -63,7 +63,7 @@ export const Player = () => {
             .subVectors(frontVector, sideVector)
             .applyEuler(camera.rotation)
 
-        if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))]))
+        if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))], gridPositions))
         {
             api.position.set(pos.current[0] + Math.round(direction.x), pos.current[1], pos.current[2] + Math.round(direction.z))
             hasMoved = true;
