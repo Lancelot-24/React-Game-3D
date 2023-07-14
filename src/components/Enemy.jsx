@@ -2,7 +2,7 @@ import { useBox } from '@react-three/cannon';
 import {useFrame} from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
-import { CheckValidMove, RandomRange } from '../helperScripts/helper';
+import { CheckValidMove, RandomRange, enemyStates } from '../helperScripts/helper';
 import { enemyGridPositions } from '../helperScripts/consts';
 
 
@@ -24,25 +24,25 @@ export const Enemy = () => {
 
     useEffect(() => {
         api.position.subscribe((p) => pos.current = p)
+        
     }, [api.position])
-
-
-
+  
     //Called every frame
     useFrame(() => {
-        
         {moved && setMoveTimer(moveTimer + 1)}
-        {moveTimer > 60 && setMoveTimer(0)}
-        {moveTimer > 60 && setMoved(false)}
+        {moveTimer > 120 && setMoveTimer(0)}
+        {moveTimer > 120 && setMoved(false)}
 
-        if(!moved)
+       
+        if(!moved && enemyStates() === 0)
         {
             let x = RandomRange(-1, 2)
             let z = RandomRange(-1, 2)
             if(CheckValidMove([x + pos.current[0], z + pos.current[2]], enemyGridPositions))
             {
-                api.position.set(x + pos.current[0], -1, z + pos.current[2])
+                api.position.set(x + pos.current[0], -0.95, z + pos.current[2])
                 setMoved(true)
+                
             }
         }
         

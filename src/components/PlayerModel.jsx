@@ -12,10 +12,9 @@ import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { useKeyboard } from '../hooks/useKeyboard'
 
-export function PlayerEXE(props) {
+export const PlayerEXE = (props) =>{
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/scene.glb')
-  const {attack} = useKeyboard()
   const { actions } = useAnimations(animations, group)
   const [name, setName] = useState('ch049_ui_debut_loop')
 
