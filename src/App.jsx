@@ -32,7 +32,6 @@ function App() {
        
         <ContactShadows position={[0, -0.9, -0.025]} opacity={1}  blur={1} far={10} />
       </Canvas>
-      <div className='absolute centered cursor'>+</div>
     </>
   );
  
