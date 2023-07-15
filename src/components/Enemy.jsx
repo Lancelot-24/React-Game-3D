@@ -3,8 +3,8 @@ import {useFrame} from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
 import { CheckValidMove, RandomRange, SetEnemyPos, enemyStates } from '../helperScripts/Helpers';
-import { enemyGridPositions } from '../helperScripts/Consts';
 import { EnemyHealth } from './EnemyHealth';
+import { enemyGridPositions } from '../helperScripts/Consts';
 
 
 
@@ -39,7 +39,7 @@ export const Enemy = () => {
         {
             let x = RandomRange(-1, 2)
             let z = RandomRange(-1, 2)
-            if(CheckValidMove([x + pos.current[0], z + pos.current[2]], enemyGridPositions))
+            if(CheckValidMove([x + pos.current[0], z + pos.current[2]], enemyGridPositions ))
             {
                 api.position.set(x + pos.current[0], -0.95, z + pos.current[2])
                 SetEnemyPos([x + pos.current[0], z + pos.current[2]])
