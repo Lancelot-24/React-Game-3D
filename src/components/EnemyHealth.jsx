@@ -14,7 +14,7 @@ export const EnemyHealth = () => {
 
     //Win condition
     useEffect(() => {
-        if(enemyHealth < 0)
+        if(enemyHealth <= 0)
         {
             alert("You Win!")
             window.location.reload()

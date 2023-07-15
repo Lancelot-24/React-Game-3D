@@ -15,7 +15,7 @@ export const PlayerHealth = () => {
 
     //Lose condition
     useEffect(() => {
-        if(playerHealth < 0)
+        if(playerHealth <= 0)
         {
             alert("You died!")
             window.location.reload()
