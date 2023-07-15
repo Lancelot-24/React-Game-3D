@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
 import { CheckValidMove, RandomRange, SetEnemyPos, enemyStates } from '../helperScripts/Helpers';
 import { EnemyHealth } from './EnemyHealth';
-import { enemyGridPositions } from '../helperScripts/Consts';
+import { enemyGridPositions } from '../helperScripts/Consts.jsx';
 
 
 

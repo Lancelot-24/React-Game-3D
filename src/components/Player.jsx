@@ -6,7 +6,7 @@ import { useKeyboard } from '../hooks/useKeyboard';
 import { CheckValidMove, SetPlayerJumped, SetPlayerPos } from '../helperScripts/Helpers';
 import { PlayerEXE } from './PlayerModel';
 import { PlayerHealth } from './PlayerHealth';
-import { JUMP_FORCE, gridPositions } from '../helperScripts/Consts';
+import { JUMP_FORCE, gridPositions } from '../helperScripts/Consts.jsx';
 
 export const Player = () => {
     let hasMoved;
