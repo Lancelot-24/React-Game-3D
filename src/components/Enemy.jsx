@@ -2,9 +2,9 @@ import { useBox } from '@react-three/cannon';
 import {useFrame} from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
-import { CheckValidMove, RandomRange, SetEnemyPos, enemyStates } from '../helperScripts/Helpers';
+import { CheckValidMove, RandomRange, SetEnemyPos, enemyStates } from '../Helpers';
 import { EnemyHealth } from './EnemyHealth';
-import { enemyGridPositions } from '../helperScripts/Consts.jsx';
+import { enemyGridPositions } from '../Consts';
 
 
 

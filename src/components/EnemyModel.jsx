@@ -10,7 +10,7 @@ Title: Megaman X Dive - Megaman.exe
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { AdjustPlayerHealth, CheckHitPos, enemyPos, enemyStates, playerJumped, playerPos } from '../helperScripts/Helpers';
+import { AdjustPlayerHealth, CheckHitPos, enemyPos, enemyStates, playerJumped, playerPos } from '../Helpers';
 
 export const EnemyEXE = (props) => {
   const group = useRef()

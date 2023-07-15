@@ -2,7 +2,7 @@ import { extend, useFrame } from '@react-three/fiber';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import ThaleahFat from '../assets/fonts/ThaleahFat_Medium.json';
-import { playerHealth } from '../helperScripts/Helpers';
+import { playerHealth } from '../Helpers';
 import { useEffect, useState } from 'react';
 
 extend({ TextGeometry })

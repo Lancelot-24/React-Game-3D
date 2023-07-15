@@ -3,10 +3,10 @@ import { useThree, useFrame, act } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
-import { CheckValidMove, SetPlayerJumped, SetPlayerPos } from '../helperScripts/Helpers';
+import { CheckValidMove, SetPlayerJumped, SetPlayerPos } from '../Helpers';
 import { PlayerEXE } from './PlayerModel';
 import { PlayerHealth } from './PlayerHealth';
-import { JUMP_FORCE, gridPositions } from '../helperScripts/Consts.jsx';
+import { JUMP_FORCE, gridPositions } from '../Consts';
 
 export const Player = () => {
     let hasMoved;
