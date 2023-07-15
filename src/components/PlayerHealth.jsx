@@ -13,7 +13,7 @@ export const PlayerHealth = () => {
     const font = new FontLoader().parse(ThaleahFat);
     const [health, setHealth] = useState(playerHealth)
 
-
+    //Lose condition
     useEffect(() => {
         if(playerHealth < 0)
         {
@@ -22,6 +22,7 @@ export const PlayerHealth = () => {
         }
     }, [playerHealth])
 
+    //Update health live
     useFrame(() => {
         setHealth(playerHealth.toString())
     })

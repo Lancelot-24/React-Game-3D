@@ -1,13 +1,12 @@
 import './CSS/App.css';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
-import { ContactShadows, OrbitControls, Sky, Stars } from '@react-three/drei';
+import { ContactShadows, Sky, Stars } from '@react-three/drei';
 import { Grid } from './components/Grid';
 import { EnemyGrid } from './components/EnemyGrid';
 import { Player } from './components/Player';
 import { Enemy } from './components/Enemy';
 import {FPV} from './components/FPV';
-import { PlayerHealth } from './components/PlayerHealth';
 
 
 function App() {

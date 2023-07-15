@@ -12,6 +12,7 @@ export const EnemyHealth = () => {
     
     const font = new FontLoader().parse(ThaleahFat);
 
+    //Win condition
     useEffect(() => {
         if(enemyHealth < 0)
         {

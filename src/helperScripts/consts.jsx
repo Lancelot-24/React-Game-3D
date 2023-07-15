@@ -1,7 +1,8 @@
-import { Vector3 } from "three";
 
 //Player consts
 export const JUMP_FORCE = 5;
+
+//Player and enemy grid positions
 export const gridPositions = 
     [[-1,-1], [0,-1], [1,-1], 
     [-1,0], [0,0], [1,0], 

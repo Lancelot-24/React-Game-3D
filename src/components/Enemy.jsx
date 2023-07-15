@@ -34,7 +34,7 @@ export const Enemy = () => {
         {moveTimer > 120 && setMoveTimer(0)}
         {moveTimer > 120 && setMoved(false)}
 
-       
+       //enenmy movement
         if(!moved && enemyStates() === 0)
         {
             let x = RandomRange(-1, 2)
