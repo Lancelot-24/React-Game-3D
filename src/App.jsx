@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/App.css';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { ContactShadows, OrbitControls, Sky, Stars } from '@react-three/drei';
@@ -7,6 +7,7 @@ import { EnemyGrid } from './components/EnemyGrid';
 import { Player } from './components/Player';
 import { Enemy } from './components/Enemy';
 import {FPV} from './components/FPV';
+import { PlayerHealth } from './components/PlayerHealth';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 15, 10]} angle={0.3} />
         <FPV />
+        
         <Physics>
           <Grid />
           <EnemyGrid />

@@ -10,7 +10,7 @@ Title: Megaman X Dive - Megaman.exe
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { RandomRange, enemyStates } from '../helperScripts/helper'
+import { AdjustEnemyHealth, AdjustPlayerHealth, CheckHitPos, RandomRange, enemyPos, enemyStates, playerJumped, playerPos } from '../helperScripts/Helpers'
 
 export const EnemyEXE = (props) => {
   const group = useRef()
@@ -40,6 +40,13 @@ export const EnemyEXE = (props) => {
     {
       setAnimPlayed(true)
       setName('ch049_skill_01_stand_mid')
+      setTimeout(() => {
+        for(let i = -1; i < 2; i++)
+        {
+          let hitAttempt = [enemyPos[0], i]
+          if(CheckHitPos(hitAttempt, playerPos) && !playerJumped)
+              AdjustPlayerHealth(-5)
+        }}, 100)
     }
   })
 

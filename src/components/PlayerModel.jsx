@@ -9,8 +9,8 @@ Title: Megaman X Dive - Megaman.exe
 
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations, useTexture } from '@react-three/drei'
-import { useFrame, useLoader } from '@react-three/fiber'
-import { useKeyboard } from '../hooks/useKeyboard'
+import { useFrame } from '@react-three/fiber'
+import { AdjustEnemyHealth, AdjustPlayerHealth, CheckHitPos, enemyPos, playerPos } from '../helperScripts/Helpers'
 
 export const PlayerEXE = (props) =>{
   const group = useRef()
@@ -18,7 +18,7 @@ export const PlayerEXE = (props) =>{
   const { actions } = useAnimations(animations, group)
   const [name, setName] = useState('ch049_ui_debut_loop')
 
-
+  const[hit, setHit] = useState(false)
   const [animPlayed, setAnimPlayed] = useState(false)
   const [animTimer, setAnimTimer] = useState(0)
 
@@ -33,15 +33,28 @@ export const PlayerEXE = (props) =>{
   useFrame(() => {
     {animPlayed && setAnimTimer(animTimer + 1)}
 
-    {animTimer > 60 && setAnimPlayed(false)}
-    {animTimer > 60 && setAnimTimer(0)}
-    {animTimer > 60 && setName('ch049_ui_debut_loop')}
+    {animTimer > 70 && setAnimPlayed(false)}
+    {animTimer > 70 && setAnimTimer(0)}
+    {animTimer > 70 && setHit(false)}
 
+    {animTimer > 50 && setName('ch049_ui_debut_loop')}
     onclick = () => {
+      if(!animPlayed && animTimer===0){
         setAnimPlayed(true)
         setName('ch049_skill_01_stand_mid')
+      }
+      if(!hit){
+        setHit(true)
+        setTimeout(() => {
+          for(let i = -2; i > -5; i--)
+          {
+            let hitAttempt = [playerPos[0], i]
+            if(CheckHitPos(hitAttempt, enemyPos))
+                AdjustEnemyHealth(-5)
+          }}, 500)
+      }
     }
-    
+      
   })
 
   return (

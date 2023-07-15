@@ -3,9 +3,10 @@ import { useThree, useFrame, act } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
-import { JUMP_FORCE, gridPositions } from '../helperScripts/consts';
-import { CheckValidMove } from '../helperScripts/helper';
+import { JUMP_FORCE, gridPositions } from '../helperScripts/Consts';
+import { CheckValidMove, SetPlayerJumped, SetPlayerPos, playerJumped, playerPos } from '../helperScripts/Helpers';
 import { PlayerEXE } from './PlayerModel';
+import { PlayerHealth } from './PlayerHealth';
 
 export const Player = () => {
     let hasMoved;
@@ -66,14 +67,18 @@ export const Player = () => {
         if(!hasMoved && CheckValidMove([Math.round(pos.current[0]) + Math.round(direction.x), Math.round(pos.current[2] + Math.round(direction.z))], gridPositions))
         {
             api.position.set(pos.current[0] + Math.round(direction.x), pos.current[1], pos.current[2] + Math.round(direction.z))
+            SetPlayerPos([Math.round(pos.current[0] + Math.round(direction.x)), -Math.round(pos.current[2] + Math.round(direction.z))])
             hasMoved = true;
         }
+        if (Math.abs(vel.current[1]) < 0.03)
+            SetPlayerJumped(false);
 
         //jump
         switch (true) {
             case jump:
                 if (Math.abs(vel.current[1]) < 0.03)
                     api.velocity.set(0, JUMP_FORCE, 0)
+                    SetPlayerJumped(true);
                 break;
         }
         
@@ -82,7 +87,8 @@ export const Player = () => {
 
     return (
         <mesh ref={ref}>
-        <PlayerEXE position={[0,-0.4,0.1]}/>
+        <PlayerEXE position={[0,-0.4,0.2]}/>
+        <PlayerHealth />
         </mesh>
 
     );

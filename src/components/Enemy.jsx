@@ -2,8 +2,9 @@ import { useBox } from '@react-three/cannon';
 import {useFrame} from '@react-three/fiber';
 import { useEffect, useRef, useState } from 'react';
 import { EnemyEXE } from './EnemyModel';
-import { CheckValidMove, RandomRange, enemyStates } from '../helperScripts/helper';
-import { enemyGridPositions } from '../helperScripts/consts';
+import { CheckValidMove, RandomRange, SetEnemyPos, enemyPos, enemyStates } from '../helperScripts/Helpers';
+import { enemyGridPositions } from '../helperScripts/Consts';
+import { EnemyHealth } from './EnemyHealth';
 
 
 
@@ -41,6 +42,7 @@ export const Enemy = () => {
             if(CheckValidMove([x + pos.current[0], z + pos.current[2]], enemyGridPositions))
             {
                 api.position.set(x + pos.current[0], -0.95, z + pos.current[2])
+                SetEnemyPos([x + pos.current[0], z + pos.current[2]])
                 setMoved(true)
                 
             }
@@ -51,6 +53,7 @@ export const Enemy = () => {
     return (
         <mesh ref={ref} >
         <EnemyEXE />
+        <EnemyHealth/>
         </mesh>
 
     );
